@@ -1,9 +1,9 @@
-'''
+"""
 UDOO board
 
 Reference:
 http://www.udoo.org/ProjectsAndTutorials/linux-gpio-manipulation/
-'''
+"""
 
 import os
 
@@ -108,7 +108,8 @@ class Udoo(Board):
 
     def _pin_state_filename(self, gpio_id):
         return os.path.join(
-            self._base_pin_path(gpio_id), DIGITAL_PIN_STATE_FILENAME,
+            self._base_pin_path(gpio_id),
+            DIGITAL_PIN_STATE_FILENAME,
         )
 
     def _set_digital_mode(self, pin, mode):

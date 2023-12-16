@@ -11,7 +11,7 @@ import pingo
 
 
 class YunBridge:
-    '''
+    """
     Pyun: Python interface to Arduino Yún via HTTP to Bridge sketch
 
     WARNING: this requires the Bridge sketch running on the Arduino.
@@ -27,7 +27,7 @@ class YunBridge:
      * "/arduino/analog/2"       -> analogRead(2)
      * "/arduino/mode/13/input"  -> pinMode(13, INPUT)
      * "/arduino/mode/13/output" -> pinMode(13, OUTPUT)
-    '''
+    """
 
     def __init__(self, host, verbose=False):
         self.host = host
@@ -85,7 +85,9 @@ class YunBridge:
 
 
 class ArduinoYun(
-    pingo.Board, pingo.AnalogInputCapable, pingo.PwmOutputCapable,
+    pingo.Board,
+    pingo.AnalogInputCapable,
+    pingo.PwmOutputCapable,
 ):
     def __init__(self, host, verbose=False):
         super(ArduinoYun, self).__init__()

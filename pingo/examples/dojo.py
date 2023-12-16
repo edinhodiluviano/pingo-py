@@ -9,7 +9,6 @@ This script assumes:
 - 7-segment display connected to pins 6-13
 - segment G is pin 13, decimal point is pin 9
 - potentiometer connected to analog pin 'A0'
-
 """
 
 import time

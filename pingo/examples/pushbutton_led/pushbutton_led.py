@@ -1,11 +1,10 @@
-'''
+"""
 Pushbutton led.
 
 The led comes on when you press the button.
 
 Connections example found on ./button.png
-
-'''
+"""
 # -*- coding: utf-8 -*-
 import sys
 

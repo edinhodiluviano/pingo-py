@@ -1,4 +1,4 @@
-'''
+"""
 Classic Garoa Hardware Dojo Exercise
 
 Light up segments on perimeter of display in sequence,
@@ -8,8 +8,7 @@ This script assumes:
 
 - ``board.pins[13]`` is a ``DigitalPin``
 - there is an LED attached to it
-
-'''
+"""
 
 from time import sleep
 

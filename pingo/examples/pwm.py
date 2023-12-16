@@ -1,7 +1,6 @@
-'''
+"""
 Using PWM on pin #6 to dim a LED
-
-'''
+"""
 
 import time
 from pprint import pprint

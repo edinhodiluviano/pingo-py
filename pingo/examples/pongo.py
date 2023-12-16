@@ -42,10 +42,10 @@ def new_ball_pos(pos, velocity):
 
 def draw_paddle(x, y, color):
     for offset in range(PADDLE_SIZE):
-        screen.addstr(y + offset, x, " ", color)
+        screen.addstr(y + offset, x, ' ', color)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     screen = curses.initscr()
     curses.noecho()
     curses.cbreak()
@@ -66,10 +66,10 @@ if __name__ == "__main__":
     galileo = pingo.detect.get_board()
     arduino = pingo.arduino.get_arduino()
 
-    pot_galileo = galileo.pins["A0"]
+    pot_galileo = galileo.pins['A0']
     pot_galileo.mode = pingo.ANALOG
 
-    pot_arduino = arduino.pins["A0"]
+    pot_arduino = arduino.pins['A0']
     pot_arduino.mode = pingo.ANALOG
 
     # Read the initial values of the paddles
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         draw_paddle(MAX_X, paddle_2_pos, curses.color_pair(2))
 
         # Erase the ball
-        screen.addstr(ball_pos[1], ball_pos[0], " ", curses.color_pair(2))
+        screen.addstr(ball_pos[1], ball_pos[0], ' ', curses.color_pair(2))
 
         # Read current paddle positions
         paddle_1_pos = int(
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
         ball_pos = new_ball_pos(ball_pos, ball_velocity)
 
-        screen.addstr(ball_pos[1], ball_pos[0], " ", curses.color_pair(1))
+        screen.addstr(ball_pos[1], ball_pos[0], ' ', curses.color_pair(1))
         draw_paddle(MIN_X, paddle_1_pos, curses.color_pair(1))
         draw_paddle(MAX_X, paddle_2_pos, curses.color_pair(1))
 

@@ -12,8 +12,6 @@
 0
 >>> 0 <= yun.analogRead(5) < 1024
 True
-
-
 """
 
 import doctest

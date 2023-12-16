@@ -145,4 +145,4 @@ class RaspberryPiBPlus(RaspberryPi):
 
 
 class RaspberryPi2B(RaspberryPiBPlus):
-    '''TODO: for now, this works'''
+    """TODO: for now, this works"""

@@ -1,11 +1,11 @@
-'''
+"""
 Copied from:
 https://github.com/tino/pyFirmata/blob/master/pyfirmata/util.py
-'''
+"""
 
 
 def pin_list_to_board_dict(capability_query_response):
-    '''
+    """
     Capability Response codes:
         INPUT:  0, 1
         OUTPUT: 1, 1
@@ -13,7 +13,7 @@ def pin_list_to_board_dict(capability_query_response):
         PWM:    3, 8
         SERV0:  4, 14
         I2C:    6, 1
-    '''
+    """
 
     board_dict = {
         'digital': [],

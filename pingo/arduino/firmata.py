@@ -1,7 +1,7 @@
-'''
+"""
 Firmata protocol client for Pingo
 Works on Arduino
-'''
+"""
 
 import platform
 import time
@@ -52,7 +52,7 @@ class ArduinoFirmata(Board, AnalogInputCapable, PwmOutputCapable):
             from PyMata.pymata import PyMata as PyMata  # noqa
         except ImportError:
             msg = 'pingo.arduino.Arduino requires PyMata installed'
-            raise ImportError(msg)
+            raise ImportError(msg) from None
 
         super(ArduinoFirmata, self).__init__()
         self.port = port

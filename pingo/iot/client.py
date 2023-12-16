@@ -11,7 +11,7 @@ except ImportError:
 
 
 class HTTPBoard(pingo.Board):
-    ''' '''
+    """ """
 
     def __init__(self, server):
         self.server = server

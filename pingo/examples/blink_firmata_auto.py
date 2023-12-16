@@ -1,12 +1,11 @@
-'''
+"""
 Blink an LED on a remote Arduino
 
 This script assumes:
 
 - this computer is connected to an Arduino
 - the Arduino is running the Examples->Firmata->StandardFirmata sketch
-
-'''
+"""
 
 import time
 

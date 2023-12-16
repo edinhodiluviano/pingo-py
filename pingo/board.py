@@ -27,7 +27,7 @@ class ArgumentOutOfRange(Exception):
 
 
 class Board:
-    '''
+    """
     Abstract class defining common interface for all boards.
 
     Instance attributes of interest to end-users:
@@ -49,23 +49,23 @@ class Board:
 
     * Override ``cleanup()``, if the board needs it.
 
-    '''
+    """
 
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        '''
+        """
         Registers ``self.cleanup`` for calling at script exit.
 
         This ``__init__`` method should be called by the ``__init__`` of all
         ``Board`` subclasses using ``super(BoardSubclass, self).__init__()``.
         The ``__init__`` of board subclasses should also call
         ``self._add_pins(pins)`` with an iterable of ``Pin`` instances.
-        '''
+        """
         atexit.register(self.cleanup)
 
     def filter_pins(self, *pin_types):
-        '''
+        """
         Get a list of pins that are instances of the given pin_types
 
         See the ``digital_pins`` property for an example of use.
@@ -73,7 +73,7 @@ class Board:
         Arguments:
         ---------
             ``pin_types``: an iterable of types (usually, ``Pin`` subclasses)
-        '''
+        """
         filtered = []
         for pin_type in pin_types:
             sub = [x for x in self.pins.values() if isinstance(x, pin_type)]
@@ -82,31 +82,31 @@ class Board:
         return filtered
 
     def select_pins(self, locations):
-        '''Get list of pins from iterable of locations'''
+        """Get list of pins from iterable of locations"""
         locations = list(locations)
         return [self.pins[location] for location in locations]
 
     @property
     def digital_pins(self):
-        '''[property] Get list of digital pins'''
+        """[property] Get list of digital pins"""
 
         return sorted(self.filter_pins(DigitalPin), key=attrgetter('location'))
 
     def cleanup(self):
-        '''
+        """
         Releases pins for use by other applications.
 
         Overriding this stub may or may not be needed in specific drivers.
         For example, scripts running on boards using standard ``sysfs``
         GPIO access should ``unexport`` the pins before exiting.
-        '''
+        """
 
     ######################################################################
     # the following methods are of interest only to implementers of
     # drivers, i.e. concrete Board subclasses
 
     def _add_pins(self, pins):
-        '''
+        """
         Populate ``board.pins`` mapping from ``Pin`` instances.
 
         The ``__init__`` method of concrete ``Board`` subclasses should
@@ -115,7 +115,7 @@ class Board:
         Arguments:
         ---------
             ``pins``: an iterable of ``Pin`` instances
-        '''
+        """
         self.pins = StrKeyDict()
         self.gpio = StrKeyDict()
         for pin in pins:
@@ -125,71 +125,71 @@ class Board:
 
     @abstractmethod
     def _set_digital_mode(self, pin, mode):
-        '''
+        """
         Abstract method to be implemented by each ``Board`` subclass.
 
         The ``«pin».mode(…)`` property calls this method because
         the procedure to set pin mode changes from board to board.
-        '''
+        """
 
     @abstractmethod
     def _set_pin_state(self, pin, state):
-        '''
+        """
         Abstract method to be implemented by each ``Board`` subclass
 
         The ``«pin».__change_state(…)`` method calls this method because
         the procedure to set pin state changes from board to board.
-        '''
+        """
 
     @abstractmethod
     def _get_pin_state(self, pin):
-        '''
+        """
         Abstract method to be implemented by each ``Board`` subclass
-        '''
+        """
 
 
 class AnalogInputCapable:
-    '''
+    """
     Mixin interface for boards that support AnalogInputPin
 
     Concrete ``AnalogInputCapable`` subclasses should implement
     ``_get_pin_value`` to read the values of analog pins.
-    '''
+    """
 
     __metaclass__ = ABCMeta
 
     @abstractmethod
     def _get_pin_value(self, pin):
-        '''
+        """
         Abstract method to be implemented by each ``Board`` subclass.
 
         The ``«AnalogPin».value(…)`` method calls this method because
         the procedure to read pin analog signal changes from board to board.
-        '''
+        """
 
     @abstractmethod
     def _set_analog_mode(self, pin, mode):
-        '''
+        """
         Abstract method to be implemented by each ``Board`` subclass.
 
         The ``«pin».mode(…)`` property calls this method because
         the procedure to set pin mode changes from board to board.
-        '''
+        """
 
 
 class PwmOutputCapable:
-    '''
+    """
     Mixin interface for boards that support PwmOutputPin
 
     Concrete ``PwmOutputCapable`` subclasses should implement
     ``_get_pin_value`` to write the PWM signal of analog pins.
-    '''
+    """
 
     __metaclass__ = ABCMeta
 
     @abstractmethod
     def _set_pwm_mode(self, pin):
-        '''Abstract method to be implemented by each ``Board`` subclass.'''
+        """Abstract method to be implemented by each ``Board`` subclass."""
 
     @abstractmethod
     def _set_pwm_frequency(self, pin, value):
@@ -210,33 +210,33 @@ class PwmOutputCapable:
         """
 
     def _get_pwm_duty_cycle(self, pin):
-        '''
+        """
         This method should be overwritten if the ``Board`` subclass
         has this feature.
-        '''
+        """
         if hasattr(pin, '_duty_cycle'):
             return pin._duty_cycle
         return 0.0
 
     def _get_pwm_frequency(self, pin):
-        '''
+        """
         This method should be overwritten if the ``Board`` subclass
         has this feature.
-        '''
+        """
         if hasattr(pin, '_frequency'):
             return pin._frequency
         return 0.0
 
 
 class Pin:
-    '''Abstract class defining common interface for all pins.'''
+    """Abstract class defining common interface for all pins."""
 
     __metaclass__ = ABCMeta
 
     suported_modes = []
 
     def __init__(self, board, location, gpio_id=None):
-        '''
+        """
         Initialize ``Pin`` instance with
 
         Arguments:
@@ -248,7 +248,7 @@ class Pin:
                 acceptable.
             ``gpio_id``
                 Logical name of GPIO pin (e.g. ``sysfs`` file name).
-        '''
+        """
         self.board = board
         self.location = location
         if gpio_id is not None:
@@ -266,10 +266,10 @@ class Pin:
 
     @property
     def mode(self):
-        '''
+        """
         [property] Get/set pin mode to ``pingo.IN``, ``pingo.OUT``
         ``pingo.ANALOG`` or ``pingo.PWM``
-        '''
+        """
         return self._mode
 
     @mode.setter
@@ -292,7 +292,7 @@ class Pin:
 
 
 class DigitalPin(Pin):
-    '''
+    """
     Defines common interface for all digital pins.
 
     The ``repr`` of a digital pin looks like ``<DigitalPin gpio21@40>``
@@ -301,7 +301,7 @@ class DigitalPin(Pin):
 
     Implementers of board drivers do not need to subclass this class
     because pins delegate all board-dependent behavior to the board.
-    '''
+    """
 
     suported_modes = [IN, OUT]
 
@@ -311,7 +311,7 @@ class DigitalPin(Pin):
 
     @property
     def state(self):
-        '''[property] Get/set pin state to ``pingo.HIGH`` or ``pingo.LOW``'''
+        """[property] Get/set pin state to ``pingo.HIGH`` or ``pingo.LOW``"""
         if self.mode not in [IN, OUT]:
             raise WrongPinMode
 
@@ -329,23 +329,23 @@ class DigitalPin(Pin):
         self._state = value
 
     def low(self):
-        '''Set voltage of pin to ``pingo.LOW`` (GND).'''
+        """Set voltage of pin to ``pingo.LOW`` (GND)."""
         self.state = LOW
 
     lo = low  # shortcut for interactive use
 
     def high(self):
-        '''Set state of the pin to ``pingo.HIGH`` (Vcc).'''
+        """Set state of the pin to ``pingo.HIGH`` (Vcc)."""
         self.state = HIGH
 
     hi = high  # shortcut for interactive use
 
     def toggle(self):
-        '''Change state of the pin.'''
+        """Change state of the pin."""
         self.state = HIGH if self.state == LOW else LOW
 
     def pulse(self):
-        '''Generate a pulse in state of the pin.'''
+        """Generate a pulse in state of the pin."""
         if self.state == LOW:
             self.state = HIGH
             self.state = LOW
@@ -397,35 +397,35 @@ class PwmPin(DigitalPin):
 
 
 class AnalogPin(Pin):
-    '''
+    """
     Defines common interface for all analog pins.
 
     Implementers of board drivers do not need to subclass this class
     because pins delegate all board-dependent behavior to the board.
 
     This pin type supports read operations only.
-    '''
+    """
 
     suported_modes = [IN, ANALOG]
 
     def __init__(self, board, location, resolution, gpio_id=None):
-        '''
+        """
         :param board: the board to which this ping belongs
         :param location: the physical location of the pin on the board
         :param resolution: resolution of the AD converter in bits
         :param gpio_id: the logical id for GPIO access, if applicable
-        '''
+        """
         Pin.__init__(self, board, location, gpio_id)
         self.bits = resolution
         self._mode = None
 
     @property
     def value(self):
-        '''[property] Pin value as integer from 0 to 2 ** resolution - 1'''
+        """[property] Pin value as integer from 0 to 2 ** resolution - 1"""
         return self.board._get_pin_value(self)
 
     def ratio(self, from_min=0, from_max=None, to_min=0.0, to_max=1.0):
-        '''
+        """
         Pin value as a float, by default from 0.0 to 1.0.
 
         The ``from...`` and ``to...`` parameters work like in the Arduino map_
@@ -433,7 +433,7 @@ class AnalogPin(Pin):
         output range.
 
         .. _map: http://arduino.cc/en/reference/map
-        '''
+        """
         if from_max is None:
             from_max = 2**self.bits - 1
 
@@ -447,7 +447,7 @@ class AnalogPin(Pin):
 
     @property
     def percent(self):
-        '''[property] Pin value as float from 0.0 to 100.0'''
+        """[property] Pin value as float from 0.0 to 100.0"""
         return self.ratio(to_max=100.0)
 
 

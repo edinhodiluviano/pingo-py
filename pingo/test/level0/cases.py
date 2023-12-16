@@ -55,7 +55,7 @@ class BoardBasics:
         assert output == pingo.HIGH
 
     def test_jumpwire(self):
-        '''Wire this DigitalPin directly into VDD'''
+        """Wire this DigitalPin directly into VDD"""
         pin = self.board.pins[self.digital_input_pin_number]
         pin.mode = pingo.IN
         output = pin.state

@@ -1,4 +1,4 @@
-'''
+"""
 Blink an LED via the current board and another via an Arduino
 
 This script assumes:
@@ -6,8 +6,7 @@ This script assumes:
 - ``board.pins[13]`` is a ``DigitalPin``
 - ``ard.pins[13]`` is a ``DigitalPin``
 - there is an LED attached to each of them
-
-'''
+"""
 
 import time
 

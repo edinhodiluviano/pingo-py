@@ -21,7 +21,8 @@ class RaspberryTest(unittest.TestCase):
 
 @unittest.skipIf(not running_on_raspberry, 'RaspberryPi not detected')
 @unittest.skipIf(
-    not has_module('RPi'), 'pingo.rpi requires RPi.GPIO installed',
+    not has_module('RPi'),
+    'pingo.rpi requires RPi.GPIO installed',
 )
 class RaspberryBasics(RaspberryTest, level0.BoardBasics):
     pass
@@ -29,7 +30,8 @@ class RaspberryBasics(RaspberryTest, level0.BoardBasics):
 
 @unittest.skipIf(not running_on_raspberry, 'RaspberryPi not detected')
 @unittest.skipIf(
-    not has_module('RPi'), 'pingo.rpi requires RPi.GPIO installed',
+    not has_module('RPi'),
+    'pingo.rpi requires RPi.GPIO installed',
 )
 class RaspberryExceptions(RaspberryTest, level0.BoardExceptions):
     pass

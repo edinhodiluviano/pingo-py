@@ -1,6 +1,6 @@
-'''
+"""
 Utility to map Arduino pins connected to a 7-segment display
-'''
+"""
 
 import pingo
 

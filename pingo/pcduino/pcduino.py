@@ -11,9 +11,9 @@ from pingo.board import (
 
 
 class PcDuino(Board, AnalogInputCapable):
-    '''
+    """
     pcDuino board (works on V1 and V3)
-    '''
+    """
 
     DIGITAL_PINS_PATH = '/sys/devices/virtual/misc/gpio/'
     ADC_PATH = '/proc/'

@@ -30,7 +30,8 @@ class ArduinoFirmataTest(unittest.TestCase):
 
 @unittest.skipIf(not running_on_arduino, 'Arduino not detected')
 @unittest.skipIf(
-    not has_module('PyMata'), 'pingo.arduino.Arduino requires PyMata installed',
+    not has_module('PyMata'),
+    'pingo.arduino.Arduino requires PyMata installed',
 )
 class ArduinoBasics(ArduinoFirmataTest, level0.BoardBasics):
     @unittest.skip('ArduinoFirmata does not recognize VddPins')
@@ -40,7 +41,8 @@ class ArduinoBasics(ArduinoFirmataTest, level0.BoardBasics):
 
 @unittest.skipIf(not running_on_arduino, 'Arduino not detected')
 @unittest.skipIf(
-    not has_module('PyMata'), 'pingo.arduino.Arduino requires PyMata installed',
+    not has_module('PyMata'),
+    'pingo.arduino.Arduino requires PyMata installed',
 )
 class ArduinoDigitalExceptions(ArduinoFirmataTest, level0.BoardExceptions):
     pass
@@ -48,7 +50,8 @@ class ArduinoDigitalExceptions(ArduinoFirmataTest, level0.BoardExceptions):
 
 @unittest.skipIf(not running_on_arduino, 'Arduino not detected')
 @unittest.skipIf(
-    not has_module('PyMata'), 'pingo.arduino.Arduino requires PyMata installed',
+    not has_module('PyMata'),
+    'pingo.arduino.Arduino requires PyMata installed',
 )
 class ArduinoAnalogRead(ArduinoFirmataTest, level1.AnalogReadBasics):
     pass
@@ -56,7 +59,8 @@ class ArduinoAnalogRead(ArduinoFirmataTest, level1.AnalogReadBasics):
 
 @unittest.skipIf(not running_on_arduino, 'Arduino not detected')
 @unittest.skipIf(
-    not has_module('PyMata'), 'pingo.arduino.Arduino requires PyMata installed',
+    not has_module('PyMata'),
+    'pingo.arduino.Arduino requires PyMata installed',
 )
 class ArduinoAnalogExceptions(ArduinoFirmataTest, level1.AnalogExceptions):
     pass

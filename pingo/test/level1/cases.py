@@ -10,11 +10,11 @@ the following attributes on your TestCase setUp:
 
 
 class AnalogReadBasics:
-    '''
+    """
     Wire a 10K Ohm resistence from the AnalogPin to the GND.
     Then wire a 200 Ohm from the AnalogPin to the VND.
     This schema will provide a read of ~98%
-    '''
+    """
 
     def test_200ohmRead(self):
         pin = self.board.pins[self.analog_input_pin_number]

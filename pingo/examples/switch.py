@@ -1,7 +1,7 @@
-'''
+"""
 This example is controlled by the switch in 3
 It shows 1 if its closed, or 0 if its open.
-'''
+"""
 
 import time
 

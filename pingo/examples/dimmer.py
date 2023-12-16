@@ -1,10 +1,9 @@
-'''
+"""
 
 This example is controlled by the knob in A0
 It shows the level of power on the display
 and lights a PWM Led on 6 (or the dicimal point)
-
-'''
+"""
 
 import time
 from pprint import pprint

@@ -1,12 +1,11 @@
-'''
+"""
 Blink an LED
 
 This script assumes:
 
 - ``board.pins[13]`` is a ``DigitalPin``
 - there is an LED attached to it
-
-'''
+"""
 
 import time
 

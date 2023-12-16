@@ -1,6 +1,6 @@
-'''
+"""
 Arduino coding dojo script for the XXL panel
-'''
+"""
 
 import time
 

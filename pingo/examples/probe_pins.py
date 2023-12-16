@@ -1,9 +1,9 @@
-'''
+"""
 Sets each pin to high and waits for [ENTER]
 
 This script is useful to map the connections of digital output pins to
 a circuit such as a 7-segment display.
-'''
+"""
 
 import sys
 
