@@ -1,10 +1,11 @@
-"""
+'''
 This example is controlled by the switch in 3
 It shows 1 if its closed, or 0 if its open.
-"""
+'''
+
+import time
 
 import pingo
-import time
 
 board = pingo.detect.get_board()
 
@@ -15,13 +16,14 @@ seg_display = pingo.parts.led.SevenSegments(*display_pins)
 def show_f():
     global seg_display
     seg_display.digit = 0xF
-    print 'Fechado'  # Closed
+    print('Fechado')  # Closed
 
 
 def show_a():
     global seg_display
     seg_display.digit = 0xA
-    print 'Aberto'  # Open
+    print('Aberto')  # Open
+
 
 pin_sw = board.pins[3]
 my_switch = pingo.parts.Switch(pin_sw)
@@ -34,8 +36,8 @@ my_switch.start()
 
 try:
     while True:
-        time.sleep(.5)
-        print pin_sw.state
+        time.sleep(0.5)
+        print(pin_sw.state)
 except:
     my_switch.stop()
 else:

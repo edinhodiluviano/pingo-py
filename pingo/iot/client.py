@@ -1,5 +1,7 @@
 import json
+
 import pingo
+
 try:
     # Python 2.7
     from urllib2 import urlopen
@@ -9,14 +11,13 @@ except ImportError:
 
 
 class HTTPBoard(pingo.Board):
-    """
-    """
+    ''' '''
 
     def __init__(self, server):
         self.server = server
         response = urlopen(server)
         if response.code != 200:
-            raise Exception(u'HTTPBoard not found on server {}'.format(server))
+            raise Exception(f'HTTPBoard not found on server {server}')
         response = json.load(response)
         pins = json.loads(response['pins'])
         gpio_pins = []
@@ -40,30 +41,26 @@ class HTTPBoard(pingo.Board):
 
     def _set_digital_mode(self, pin, mode):
         mode = 'input' if pingo.IN else 'output'
-        url = '{server}mode/{mode}/{pin}'.format(server=self.server,
-                                                 mode=mode, pin=pin.location)
+        url = f'{self.server}mode/{mode}/{pin.location}'
         urlopen(url)
 
     def _set_pin_state(self, pin, state):
         mode = 'analog' if pin.is_analog else 'digital'
         state = 1 if state == pingo.HIGH else 0
-        url = '{server}{mode}/{pin}/{state}'.format(server=self.server, mode=mode,
-                                                    pin=str(pin.location),
-                                                    state=str(state))
+        url = f'{self.server}{mode}/{pin.location!s}/{state!s}'
         print(url)
         response = urlopen(url)
         if response.code != 200:
-            message = u'Pin {} could not be set to {}. HTTPBoard response: {}'
+            message = 'Pin {} could not be set to {}. HTTPBoard response: {}'
             message.format(repr(pin), state, response.code)
             raise Exception(message)
 
     def _get_pin_state(self, pin):
         mode = 'analog' if pin.is_analog else 'digital'
-        url = '{server}{mode}/{pin}'.format(server=self.server, mode=mode,
-                                            pin=pin.location)
+        url = f'{self.server}{mode}/{pin.location}'
         response = urlopen(url)
         if response.code != 200:
-            message = u'Pin {} could not be read: HTTPBoard response: {}'
+            message = 'Pin {} could not be read: HTTPBoard response: {}'
             message.format(repr(pin), response.code)
             raise Exception(message)
         return response['input']

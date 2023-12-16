@@ -4,7 +4,14 @@ import pingo
 
 ard = pingo.arduino.get_arduino()
 
-display_map = {'a': 12, 'b': 13, 'c': 7, 'd': 8, 'e': 9, 'f': 11}  # 'g': 10, 'dp': 6}
+display_map = {
+    'a': 12,
+    'b': 13,
+    'c': 7,
+    'd': 8,
+    'e': 9,
+    'f': 11,
+}  # 'g': 10, 'dp': 6}
 
 pins = [ard.pins[p] for p in sorted(display_map.values())]
 

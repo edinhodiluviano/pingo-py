@@ -4,7 +4,6 @@ mraa = None
 
 
 class BaseMraa(pingo.Board, pingo.AnalogInputCapable, pingo.PwmOutputCapable):
-
     _import_error_msg = 'pingo.intel.BaseMraa requires mraa installed'
 
     def __init__(self):
@@ -30,14 +29,15 @@ class BaseMraa(pingo.Board, pingo.AnalogInputCapable, pingo.PwmOutputCapable):
         digital_pin_numbers = [1, 2, 4, 7, 8, 12]
 
         self._add_pins(
-            [pingo.PwmPin(self, location)
-                for location in pwm_pin_numbers] +
-
-            [pingo.DigitalPin(self, location)
-                for location in digital_pin_numbers] +
-
-            [pingo.AnalogPin(self, 'A' + location, 12)
-                for location in '012345']
+            [pingo.PwmPin(self, location) for location in pwm_pin_numbers]
+            + [
+                pingo.DigitalPin(self, location)
+                for location in digital_pin_numbers
+            ]
+            + [
+                pingo.AnalogPin(self, 'A' + location, 12)
+                for location in '012345'
+            ],
         )
 
         self.mraa_pins, self.mraa_analogs, self.mraa_pwms = {}, {}, {}

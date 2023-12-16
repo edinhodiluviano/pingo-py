@@ -1,12 +1,13 @@
-"""
+'''
 Arduino coding dojo script for the XXL panel
-"""
+'''
 
-import pingo
 import time
 
+import pingo
+
 ard = pingo.arduino.get_arduino()
-print '*' * 60
+print('*' * 60)
 
 segments = [
     11,  # A
@@ -31,6 +32,6 @@ while True:
         pin = ard.pins[seg]
         pin.high()
         delay = pot.ratio() + 0.01  # add 0.01s delay for communication
-        print '%0.3f' % delay
+        print('%0.3f' % delay)
         time.sleep(delay)
         pin.low()

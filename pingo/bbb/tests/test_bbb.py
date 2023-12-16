@@ -1,14 +1,13 @@
 import unittest
 
 import pingo
-from pingo.test import level0
 from pingo.detect import check_board
+from pingo.test import level0
 
 running_on_beaglebone = check_board(pingo.bbb.BeagleBoneBlack)
 
 
 class BeagleBoneBlackTest(unittest.TestCase):
-
     def setUp(self):
         self.board = pingo.bbb.BeagleBoneBlack()
         self.vdd_pin_number = 0
@@ -20,16 +19,15 @@ class BeagleBoneBlackTest(unittest.TestCase):
         self.board.cleanup()
 
 
-@unittest.skipIf(
-    not running_on_beaglebone, "BeagleBoneBlack not detected")
+@unittest.skipIf(not running_on_beaglebone, 'BeagleBoneBlack not detected')
 class BeagleBoneBlackBasics(BeagleBoneBlackTest, level0.BoardBasics):
     pass
 
 
-@unittest.skipIf(
-    not running_on_beaglebone, "BeagleBoneBlack not detected")
+@unittest.skipIf(not running_on_beaglebone, 'BeagleBoneBlack not detected')
 class BeagleBoneBlackExceptions(BeagleBoneBlackTest, level0.BoardExceptions):
     pass
+
 
 if __name__ == '__main__':
     unittest.main()

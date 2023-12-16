@@ -1,14 +1,13 @@
 import unittest
 
 import pingo
-from pingo.test import level0
 from pingo.detect import check_board
+from pingo.test import level0
 
 running_on_udoo = check_board(pingo.udoo.Udoo)
 
 
 class UdooTest(unittest.TestCase):
-
     def setUp(self):
         self.board = pingo.udoo.Udoo()
         self.vdd_pin_number = 0

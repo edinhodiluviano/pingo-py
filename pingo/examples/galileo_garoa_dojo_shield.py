@@ -10,4 +10,4 @@ d7 = pingo.parts.led.SevenSegments(*pins)
 
 for i in range(16):
     d7.digit = i
-    sleep(.5)
+    sleep(0.5)

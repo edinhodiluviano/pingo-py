@@ -1,11 +1,20 @@
-from pingo.board import Board, DigitalPin, AnalogPin, IN, OUT, HIGH, LOW
-from pingo.board import AnalogInputCapable
+from pingo.board import (
+    HIGH,
+    IN,
+    LOW,
+    OUT,
+    AnalogInputCapable,
+    AnalogPin,
+    Board,
+    DigitalPin,
+)
 
 
 class PcDuino(Board, AnalogInputCapable):
-    """
+    '''
     pcDuino board (works on V1 and V3)
-    """
+    '''
+
     DIGITAL_PINS_PATH = '/sys/devices/virtual/misc/gpio/'
     ADC_PATH = '/proc/'
 
@@ -16,10 +25,15 @@ class PcDuino(Board, AnalogInputCapable):
 
     def __init__(self):
         self._add_pins(
-            [DigitalPin(self, location)
-                for location in range(self.LEN_DIGITAL_PINS)] +
-            [AnalogPin(self, 'A%s' % location, resolution=bits)
-                for location, bits in enumerate(self.ANALOG_PIN_RESOLUTIONS)])
+            [
+                DigitalPin(self, location)
+                for location in range(self.LEN_DIGITAL_PINS)
+            ]
+            + [
+                AnalogPin(self, 'A%s' % location, resolution=bits)
+                for location, bits in enumerate(self.ANALOG_PIN_RESOLUTIONS)
+            ],
+        )
 
     def _set_digital_mode(self, pin, mode):
         err_msg = '%r not in %r' % (mode, self.DIGITAL_PIN_MODES)
@@ -38,7 +52,7 @@ class PcDuino(Board, AnalogInputCapable):
 
     def _get_pin_state(self, pin):
         sys_string = self.DIGITAL_PINS_PATH + 'pin/gpio%s' % pin.location
-        with open(sys_string, 'r') as fp:
+        with open(sys_string) as fp:
             state = fp.read().strip()
             return HIGH if state == '1' else LOW
 

@@ -1,9 +1,9 @@
 import collections
-import UserDict
 
 
-class StrKeyDict(UserDict.UserDict):
-    """StrKeyDict always converts non-string keys to `str`
+class StrKeyDict(collections.UserDict):
+    """
+    StrKeyDict always converts non-string keys to `str`
 
     Tests for item retrieval using `d[key]` notation::
 
@@ -66,12 +66,9 @@ class StrKeyDict(UserDict.UserDict):
     def __setitem__(self, key, item):
         self.data[self.normalize(key)] = item
 
-    def __iter__(self):
-        return self.iterkeys()
-
     def update(self, iterable=None, **kwds):
         if iterable is not None:
-            if isinstance(iterable, collections.Mapping):
+            if hasattr(iterable, 'items'):
                 pairs = iterable.items()
             else:
                 pairs = ((k, v) for k, v in iterable)
@@ -79,14 +76,3 @@ class StrKeyDict(UserDict.UserDict):
                 self[key] = value
         if kwds:
             self.update(kwds)
-
-
-# Decorator
-# def mode_restricted(mode):
-#     def restriction_decorator(method):
-#         def method_wrapper(self, *args, **kwargs):
-#             if self.mode != mode:
-#                 raise WrongPinMode()
-#             return method(self, *args, **kwargs)
-#         return method_wrapper
-#     return mode_restricted

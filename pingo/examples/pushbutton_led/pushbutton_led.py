@@ -1,21 +1,22 @@
-"""Pushbutton led.
+'''
+Pushbutton led.
 
 The led comes on when you press the button.
 
 Connections example found on ./button.png
 
-"""
+'''
 # -*- coding: utf-8 -*-
-import pingo
 import sys
 
+import pingo
 
 try:
-    print("Loading board...")
+    print('Loading board...')
     board = pingo.detect.get_board()
-    print("Its ok...")
+    print('Its ok...')
 except Exception as e:
-    print("Error on get_board: {}".format(e))
+    print(f'Error on get_board: {e}')
     sys.exit(1)
 
 led_pin = board.pins[13]

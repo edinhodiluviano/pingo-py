@@ -3,7 +3,7 @@ from time import sleep
 import pingo
 
 # board = pingo.detect.get_board()       # auto-detect board
-galileo = pingo.galileo.Galileo2()     # explicit board selection
+galileo = pingo.galileo.Galileo2()  # explicit board selection
 arduino = pingo.arduino.get_arduino()  # get Arduino via serial
 
 galileo_pins = galileo.select_pins(range(8, 14) + [7])
@@ -18,4 +18,4 @@ while True:
     for i in range(16):
         display = displays[i % 2]
         display.digit = i
-        sleep(.5)
+        sleep(0.5)

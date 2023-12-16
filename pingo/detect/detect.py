@@ -1,7 +1,7 @@
-import os
 import glob
-import string
+import os
 import platform
+import string
 
 import pingo
 
@@ -15,12 +15,11 @@ class DetectionFailed(Exception):
 def _read_cpu_info():
     cpuinfo = {}
     # pattern = '(?P<key>[^\t\n]*)\t{1,2}: (?P<value>\.*)\n'
-    with open('/proc/cpuinfo', 'r') as fp:
+    with open('/proc/cpuinfo') as fp:
         for line in fp:
             line = line.strip()
             if line:
-                tokens = tuple(
-                    token.strip() for token in line.split(':'))
+                tokens = tuple(token.strip() for token in line.split(':'))
             cpuinfo[tokens[0]] = tokens[-1]
     return cpuinfo
 
@@ -36,8 +35,9 @@ def _find_arduino_dev(system):
             return os.path.join(os.path.sep, 'dev', devices[0])
 
     elif system == 'Darwin':
-        devices = (glob.glob('/dev/tty.usbmodem*')
-                   + glob.glob('/dev/tty.usbserial*'))
+        devices = glob.glob('/dev/tty.usbmodem*') + glob.glob(
+            '/dev/tty.usbserial*',
+        )
         if len(devices) == 1:
             return os.path.join(os.path.sep, 'dev', devices[0])
     return False
@@ -105,7 +105,8 @@ def get_board():
                 print('Using RaspberryPi 2 Model B...')
                 return pingo.rpi.RaspberryPi2B()
 
-    raise DetectionFailed()
+    raise DetectionFailed
+
 
 # TODO: deprecate legacy "MyBoard" factory name
 MyBoard = get_board

@@ -1,7 +1,5 @@
-# coding: utf-8
-
-import urllib
 import time
+import urllib
 
 import pingo
 
@@ -12,9 +10,8 @@ import pingo
 # PINS = range(0, 14)
 
 
-class YunBridge(object):
-
-    """
+class YunBridge:
+    '''
     Pyun: Python interface to Arduino Yún via HTTP to Bridge sketch
 
     WARNING: this requires the Bridge sketch running on the Arduino.
@@ -30,7 +27,7 @@ class YunBridge(object):
      * "/arduino/analog/2"       -> analogRead(2)
      * "/arduino/mode/13/input"  -> pinMode(13, INPUT)
      * "/arduino/mode/13/output" -> pinMode(13, OUTPUT)
-    """
+    '''
 
     def __init__(self, host, verbose=False):
         self.host = host
@@ -47,7 +44,7 @@ class YunBridge(object):
         else:
             url = self.base_url + '%s/%d' % (command, pin)
         if self.verbose:
-            print '[YunBridge] url: ', url
+            print('[YunBridge] url: ', url)
         return url
 
     def get(self, command, pin, *args):
@@ -87,10 +84,10 @@ class YunBridge(object):
         time.sleep(seconds)
 
 
-class ArduinoYun(pingo.Board, pingo.AnalogInputCapable, pingo.PwmOutputCapable):
-
+class ArduinoYun(
+    pingo.Board, pingo.AnalogInputCapable, pingo.PwmOutputCapable,
+):
     def __init__(self, host, verbose=False):
-
         super(ArduinoYun, self).__init__()
 
         self.yun = YunBridge(host, verbose)
@@ -109,14 +106,15 @@ class ArduinoYun(pingo.Board, pingo.AnalogInputCapable, pingo.PwmOutputCapable):
         digital_pin_numbers = [0, 1, 2, 4, 7, 8, 12]
 
         self._add_pins(
-            [pingo.PwmPin(self, location)
-                for location in pwm_pin_numbers] +
-
-            [pingo.DigitalPin(self, location)
-                for location in digital_pin_numbers] +
-
-            [pingo.AnalogPin(self, 'A' + location, 10)
-                for location in '012345']
+            [pingo.PwmPin(self, location) for location in pwm_pin_numbers]
+            + [
+                pingo.DigitalPin(self, location)
+                for location in digital_pin_numbers
+            ]
+            + [
+                pingo.AnalogPin(self, 'A' + location, 10)
+                for location in '012345'
+            ],
         )
 
     def _set_digital_mode(self, pin, mode):

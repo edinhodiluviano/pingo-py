@@ -1,4 +1,5 @@
-"""Classic Garoa Hardware Dojo Exercise
+'''
+Classic Garoa Hardware Dojo Exercise
 
 Light up segments on perimeter of display in sequence,
 with delay set by potentiometer.
@@ -8,9 +9,10 @@ This script assumes:
 - ``board.pins[13]`` is a ``DigitalPin``
 - there is an LED attached to it
 
-"""
+'''
 
 from time import sleep
+
 import pingo
 
 POT_LOCATION = 'A0'

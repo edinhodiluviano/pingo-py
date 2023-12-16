@@ -9,5 +9,5 @@ print('Found: %r' % ard)
 pin = ard.pins['A0']
 
 while True:
-    sleep(.02)
-    print '%4d' % pin.value, int(70 * pin.ratio()) * '*'
+    sleep(0.02)
+    print('%4d' % pin.value, int(70 * pin.ratio()) * '*')

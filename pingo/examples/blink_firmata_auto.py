@@ -1,13 +1,15 @@
-"""Blink an LED on a remote Arduino
+'''
+Blink an LED on a remote Arduino
 
 This script assumes:
 
 - this computer is connected to an Arduino
 - the Arduino is running the Examples->Firmata->StandardFirmata sketch
 
-"""
+'''
 
 import time
+
 import pingo
 
 ard = pingo.arduino.get_arduino()
@@ -17,4 +19,4 @@ led.mode = pingo.OUT
 
 while True:
     led.toggle()
-    time.sleep(.5)
+    time.sleep(0.5)

@@ -1,8 +1,9 @@
-from bottle import Bottle
 import json
-import pingo
 import sys
 
+from bottle import Bottle
+
+import pingo
 
 app = Bottle(__name__)
 board = pingo.detect.get_board()
@@ -13,7 +14,7 @@ def main():
     pins = {key: repr(value) for key, value in board.pins}
     return {
         'board': repr(board),
-        'pins': json.dumps(pins)
+        'pins': json.dumps(pins),
     }
 
 
@@ -27,8 +28,7 @@ def mode(mode, pin):
 
 @app.route('/analog')
 def analog_pins():
-    pins = {location: pin for location, pin in board.pins
-            if pin.is_analog}
+    pins = {location: pin for location, pin in board.pins if pin.is_analog}
     return {'pins': str(pins)}
 
 

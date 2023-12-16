@@ -1,11 +1,11 @@
-"""
+'''
 Utility to map Arduino pins connected to a 7-segment display
-"""
+'''
 
 import pingo
 
 ard = pingo.arduino.get_arduino()
-print '*' * 60
+print('*' * 60)
 segs = {}
 
 for i in range(14):
@@ -18,4 +18,4 @@ for i in range(14):
     pin.low()
 
 for seg, pin in sorted(segs.items()):
-    print '%s, # %s' % (pin, seg)
+    print('%s, # %s' % (pin, seg))

@@ -1,11 +1,11 @@
-"""
+'''
 Copied from:
 https://github.com/tino/pyFirmata/blob/master/pyfirmata/util.py
-"""
+'''
 
 
 def pin_list_to_board_dict(capability_query_response):
-    """
+    '''
     Capability Response codes:
         INPUT:  0, 1
         OUTPUT: 1, 1
@@ -13,7 +13,7 @@ def pin_list_to_board_dict(capability_query_response):
         PWM:    3, 8
         SERV0:  4, 14
         I2C:    6, 1
-    """
+    '''
 
     board_dict = {
         'digital': [],
@@ -45,19 +45,19 @@ def pin_list_to_board_dict(capability_query_response):
             # Iterate over evens
             if j % 2 == 0:
                 # This is safe. try: range(10)[5:50]
-                if pin[j:j + 4] == [0, 1, 1, 1]:
+                if pin[j : j + 4] == [0, 1, 1, 1]:
                     board_dict['digital'] += [i]
 
-                if pin[j:j + 2] == [2, 10]:
+                if pin[j : j + 2] == [2, 10]:
                     board_dict['analog'] += [i]
 
-                if pin[j:j + 2] == [3, 8]:
+                if pin[j : j + 2] == [3, 8]:
                     board_dict['pwm'] += [i]
 
-                if pin[j:j + 2] == [4, 14]:
+                if pin[j : j + 2] == [4, 14]:
                     board_dict['servo'] += [i]
 
-                if pin[j:j + 2] == [6, 1]:
+                if pin[j : j + 2] == [6, 1]:
                     board_dict['i2c'] += [i]
 
     # We have to deal with analog pins:
@@ -76,10 +76,8 @@ def pin_list_to_board_dict(capability_query_response):
 
     # Turn lists into tuples
     # Using dict for Python 2.6 compatibility
-    board_dict = dict([
-        (key, tuple(value))
-        for key, value
-        in board_dict.items()
-    ])
+    board_dict = dict(
+        [(key, tuple(value)) for key, value in board_dict.items()],
+    )
 
     return board_dict

@@ -1,5 +1,6 @@
-import pingo
 import time
+
+import pingo
 
 board = pingo.galileo.Galileo2()
 
@@ -8,7 +9,8 @@ pot.mode = pingo.ANALOG
 
 
 def bar(pin):
-    print "*" * int(pin.ratio() * 70)
+    print('*' * int(pin.ratio() * 70))
+
 
 while True:
     bar(pot)

@@ -1,4 +1,5 @@
-"""Classic Garoa Hardware Dojo Exercise
+"""
+Classic Garoa Hardware Dojo Exercise
 
 Light up segments on perimeter of display in sequence,
 with delay set by potentiometer.
@@ -12,6 +13,7 @@ This script assumes:
 """
 
 import time
+
 import pingo
 
 board = pingo.detect.get_board()
@@ -30,5 +32,5 @@ while True:
             continue
         led.high()
         time.sleep(pot.ratio())
-        print pot.ratio()
+        print(pot.ratio())
         led.low()

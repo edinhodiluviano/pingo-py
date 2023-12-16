@@ -1,5 +1,6 @@
-import pingo
 from time import sleep
+
+import pingo
 
 rpi = pingo.rpi.RaspberryPi()
 
@@ -15,5 +16,5 @@ for pin in pins:
 while True:
     for pin in pins:
         pin.high()
-        sleep(.04)
+        sleep(0.04)
         pin.low()

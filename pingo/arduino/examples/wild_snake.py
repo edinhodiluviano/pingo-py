@@ -1,5 +1,4 @@
-
-"""
+'''
 
 Snake head position and direction is coded like pictured below, i.e. when
 the snake head is at the middle segment going right, the code is 6, going left
@@ -23,10 +22,10 @@ To understand this diagram, read:
 < as a left arrow
 v as a down arrow
 ^ as an up arrow
-"""
+'''
 
-from time import sleep
 from random import choice
+from time import sleep
 
 import pingo
 
@@ -54,7 +53,7 @@ moves = {
     10: [9],
     11: [10],
     12: [6, 11],
-    13: [5, 11]
+    13: [5, 11],
 }
 
 for pin in pins:

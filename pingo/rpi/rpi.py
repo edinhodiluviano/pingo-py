@@ -4,7 +4,6 @@ GPIO = None
 
 
 class RaspberryPi(pingo.Board, pingo.PwmOutputCapable):
-
     # connector_p1_location: gpio_id
     PWM_PIN_MAP = {
         3: 2,
@@ -31,23 +30,29 @@ class RaspberryPi(pingo.Board, pingo.PwmOutputCapable):
     def __init__(self):
         global GPIO
         try:
-            import RPi.GPIO as GPIO
+            from RPi import GPIO
         except ImportError:
-            raise ImportError('pingo.rpi.RaspberryPi requires RPi.GPIO installed')
+            raise ImportError(
+                'pingo.rpi.RaspberryPi requires RPi.GPIO installed',
+            )
 
         super(RaspberryPi, self).__init__()
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(True)
 
-        pins = [pingo.VccPin(self, 1, 3.3),
-                pingo.VccPin(self, 2, 5.0),
-                pingo.VccPin(self, 4, 5.0),
-                pingo.VccPin(self, 17, 3.3)]
+        pins = [
+            pingo.VccPin(self, 1, 3.3),
+            pingo.VccPin(self, 2, 5.0),
+            pingo.VccPin(self, 4, 5.0),
+            pingo.VccPin(self, 17, 3.3),
+        ]
 
         pins += [pingo.GroundPin(self, n) for n in self.GROUNDS_LIST]
 
-        pins += [pingo.PwmPin(self, location, gpio_id)
-                 for location, gpio_id in self.PWM_PIN_MAP.items()]
+        pins += [
+            pingo.PwmPin(self, location, gpio_id)
+            for location, gpio_id in self.PWM_PIN_MAP.items()
+        ]
 
         self._add_pins(pins)
         self._rpi_pwm = {}
@@ -73,7 +78,7 @@ class RaspberryPi(pingo.Board, pingo.PwmOutputCapable):
     def _set_pwm_mode(self, pin, mode):
         if pin.mode != pingo.PWM:
             GPIO.setup(int(pin.gpio_id), GPIO.OUT)
-            pwm_ctrl = GPIO.PWM(int(pin.gpio_id), 60.)  # TODO set frequency
+            pwm_ctrl = GPIO.PWM(int(pin.gpio_id), 60.0)  # TODO set frequency
             self._rpi_pwm[int(pin.location)] = pwm_ctrl
             pwm_ctrl.start(0.0)  # TODO set DutyCycle
 
@@ -92,7 +97,6 @@ class RaspberryPi(pingo.Board, pingo.PwmOutputCapable):
 
 
 class RaspberryPiBPlus(RaspberryPi):
-
     # header_j8_location: gpio_id
     PWM_PIN_MAP = {
         # 1: 3.3v DC Power
@@ -141,4 +145,4 @@ class RaspberryPiBPlus(RaspberryPi):
 
 
 class RaspberryPi2B(RaspberryPiBPlus):
-    """TODO: for now, this works"""
+    '''TODO: for now, this works'''

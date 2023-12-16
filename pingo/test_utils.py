@@ -1,13 +1,12 @@
 import unittest
 
-import util
+from . import util
 
 
 class StrKeyDictTest(unittest.TestCase):
-
     def setUp(self):
         self.d = util.StrKeyDict(
-            [('2', 'two'), ('4', 'four')]
+            [('2', 'two'), ('4', 'four')],
         )
 
     def test_getitem(self):
@@ -38,6 +37,7 @@ class StrKeyDictTest(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             self.d.update([1, 3, 5])
+
 
 if __name__ == '__main__':
     unittest.main()

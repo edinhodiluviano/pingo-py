@@ -1,4 +1,5 @@
-"""Blink an LED via the current board and another via an Arduino
+'''
+Blink an LED via the current board and another via an Arduino
 
 This script assumes:
 
@@ -6,9 +7,10 @@ This script assumes:
 - ``ard.pins[13]`` is a ``DigitalPin``
 - there is an LED attached to each of them
 
-"""
+'''
 
 import time
+
 import pingo
 
 board = pingo.rpi.RaspberryPiBPlus()
@@ -30,4 +32,4 @@ while True:
     remote_led.toggle()
     print('LOCAL: ' + local_led.state)
     print('REMOTE: ' + local_led.state)
-    time.sleep(.5)
+    time.sleep(0.5)

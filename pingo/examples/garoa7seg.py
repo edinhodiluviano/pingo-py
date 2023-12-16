@@ -13,4 +13,4 @@ for char in 'GAr0A':
         d7.digit = int(char, 16)
     except ValueError:
         d7.digit = char
-    sleep(.5)
+    sleep(0.5)

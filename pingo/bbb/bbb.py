@@ -81,11 +81,20 @@ class BeagleBoneBlack(pingo.Board):
         'P9_6': 5,
         'P9_7': 5,
         'P9_8': 5,
-        'P9_32': 5  # VDD_ADC
+        'P9_32': 5,  # VDD_ADC
     }
 
-    GND_PINS = ['P8_1', 'P8_2', 'P9_1', 'P9_2', 'P9_34', 'P9_43', 'P9_44',
-                'P9_45', 'P9_46']
+    GND_PINS = [
+        'P8_1',
+        'P8_2',
+        'P9_1',
+        'P9_2',
+        'P9_34',
+        'P9_43',
+        'P9_44',
+        'P9_45',
+        'P9_46',
+    ]
 
     ANALOG_PINS = {
         'P9_33': 'AIN4',
@@ -99,12 +108,14 @@ class BeagleBoneBlack(pingo.Board):
 
     # TODO: PWR_BUT, SYS_RESET, I2C2_SCL, I2C2_SDA
 
-    _import_error_msg = 'pingo.bbb.BeagleBoneBlack requires Adafruit_BBIO installed'
+    _import_error_msg = (
+        'pingo.bbb.BeagleBoneBlack requires Adafruit_BBIO installed'
+    )
 
     def __init__(self):
         global GPIO
         try:
-            import Adafruit_BBIO.GPIO as GPIO
+            from Adafruit_BBIO import GPIO
         except ImportError:
             raise ImportError(self._import_error_msg)
 
@@ -120,12 +131,17 @@ class BeagleBoneBlack(pingo.Board):
             pingo.LOW: GPIO.LOW,
         }
 
-        gpio_pins = [pingo.DigitalPin(self, location, gpio_id)
-                     for location, gpio_id in self.PINS.items()]
-        ground_pins = [pingo.GroundPin(self, location)
-                       for location in self.GND_PINS]
-        vcc_pins = [pingo.VccPin(self, location, voltage)
-                    for location, voltage in self.VCC_PINS.items()]
+        gpio_pins = [
+            pingo.DigitalPin(self, location, gpio_id)
+            for location, gpio_id in self.PINS.items()
+        ]
+        ground_pins = [
+            pingo.GroundPin(self, location) for location in self.GND_PINS
+        ]
+        vcc_pins = [
+            pingo.VccPin(self, location, voltage)
+            for location, voltage in self.VCC_PINS.items()
+        ]
 
         self._add_pins(gpio_pins + ground_pins + vcc_pins)
 

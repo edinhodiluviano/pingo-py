@@ -1,14 +1,10 @@
 import unittest
 
 import pingo
-
-from pingo.test import level0
-from pingo.test import level1
-from pingo.test import level2
+from pingo.test import level0, level1, level2
 
 
 class GhostBoardTest(unittest.TestCase):
-
     def setUp(self):
         self.board = pingo.ghost.GhostBoard()
 
@@ -53,6 +49,7 @@ class GhostPwm(GhostBoardTest, level2.PwmBasics):
 
 class GhostPwmExceptions(GhostBoardTest, level2.PwmExceptions):
     pass
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,15 +1,13 @@
 import unittest
 
 import pingo
-from pingo.test import level0
-from pingo.test import level1
 from pingo.detect import check_board
+from pingo.test import level0, level1
 
 running_on_galileo = check_board(pingo.intel.Galileo2)
 
 
 class GalileoTest(unittest.TestCase):
-
     def setUp(self):
         self.board = pingo.intel.Galileo2()
         # Level0 Parameters

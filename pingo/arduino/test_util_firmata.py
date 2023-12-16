@@ -1,10 +1,9 @@
 import unittest
 
-from util_firmata import pin_list_to_board_dict
+from .util_firmata import pin_list_to_board_dict
 
 
 class FirmataCapabilityDetect(unittest.TestCase):
-
     def test_capability_response(self):
         test_layout = {
             'digital': (0, 1),
@@ -47,12 +46,13 @@ class FirmataCapabilityDetect(unittest.TestCase):
             # [0x6C]  # CAPABILITY_RESPONSE
             unavailible_pin
             + digital_pin
-            + analog_pin
+            + analog_pin,
         )
 
         pinmap = pin_list_to_board_dict(data_arduino)
         for key in test_layout.keys():
             self.assertEqual(pinmap[key], test_layout[key])
+
 
 if __name__ == '__main__':
     unittest.main()

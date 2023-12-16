@@ -14,6 +14,6 @@ while True:
     for pin in rgb:
         pin.low()
         print(pin, pin.state)
-        time.sleep(.5)
+        time.sleep(0.5)
         pin.high()
     break

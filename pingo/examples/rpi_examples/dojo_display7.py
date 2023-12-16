@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import atexit
 import time
-import RPi.GPIO as GPIO
+
+from RPi import GPIO
+
 import pingo
 
 # call cleanup at program exit
